@@ -1,0 +1,27 @@
+# q-lcg-config/config.global.yml
+Q-LCG_SETTINGS:
+  CHINA:
+    LANGUAGE_MODEL: "ERNIE 4.0 Lingüístico"
+    CULTURAL_ADAPTATION: "Formalidad empresarial china + jerarquía organizacional"
+    DATA_STORAGE: "Almacenamiento local en China (GDPR no aplicable)"
+    INTEGRATIONS: ["Baidu AI Studio", "Alibaba Cloud DevOps", "YubiKey China"]
+  RUSSIA:
+    LANGUAGE_MODEL: "YandexGPT Cultural Core"
+    CULTURAL_ADAPTATION: "Claridad directa + respeto por la tradición técnica rusa"
+    DATA_STORAGE: "Servidores en Rusia (Ley Federal 242-FZ)"
+    INTEGRATIONS: ["Yandex Cloud DevTools", "VK Cloud CI/CD", "YubiKey RU"]
+  JAPAN:
+    LANGUAGE_MODEL: "COTOHA Business NLP"
+    CULTURAL_ADAPTATION: "Keigo (lenguaje formal) + énfasis en la precisión"
+    DATA_STORAGE: "Centros de datos en Japón (APPI)"
+    INTEGRATIONS: ["NTT DevOps Platform", "AWS Japan DevTools", "YubiKey JP"]
+  EUROPE:
+    LANGUAGE_MODEL: "DeepL Pro + SAP AI Lingüístico"
+    CULTURAL_ADAPTATION: "Neutralidad + cumplimiento ético estricto"
+    DATA_STORAGE: "Servidores en UE/Suisa (AI Act + GDPR)"
+    INTEGRATIONS: ["SAP DevOps", "IBM Cloud CI/CD", "YubiKey EU"]
+  WEST:
+    LANGUAGE_MODEL: "Google Translation AI + Microsoft Translator"
+    CULTURAL_ADAPTATION: "Flexibilidad + enfoque en la innovación"
+    DATA_STORAGE: "Multi-cloud (CCPA + NIST)"
+    INTEGRATIONS: ["Google Cloud Build", "Azure DevOps", "Nvidia NGC", "Snowflake", "YubiKey US"]
