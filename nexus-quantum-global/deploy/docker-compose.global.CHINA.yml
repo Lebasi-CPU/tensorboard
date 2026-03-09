@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  q-lcg-gateway:
+    image: nexusquantum/q-lcg:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../q-lcg-config:/config
+    environment:
+      - REGION=CHINA
+      - ENV=DEV
+    networks:
+      - nexus-net
+
+  spark-master:
+    image: bitnami/spark:3.5
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "8081:8080"
+    networks:
+      - nexus-net
+
+  spark-worker:
+    image: bitnami/spark:3.5
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    networks:
+      - nexus-net
+
+  api-backend:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    environment:
+      - REGION=CHINA
+      - ENTORNO=DEV
+    ports:
+      - "5000:5000"
+    networks:
+      - nexus-net
+
+networks:
+  nexus-net:
+    driver: bridge

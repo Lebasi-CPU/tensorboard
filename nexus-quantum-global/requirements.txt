@@ -1,0 +1,10 @@
+flask
+flask-jwt-extended
+yfinance
+pandas
+numpy
+requests
+pyspark
+# These may require more complex setup in Docker, keeping them as placeholders if used
+# qiskit
+# transformers
