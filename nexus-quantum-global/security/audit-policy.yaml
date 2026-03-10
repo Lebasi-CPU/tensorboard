@@ -1,0 +1,10 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+- level: Metadata
+  namespaces: ["emergency-ai", "production"]
+  resources:
+  - group: ""
+    resources: ["secrets", "configmaps"]
+  - group: "sparkoperator.k8s.io"
+    resources: ["sparkapplications"]
