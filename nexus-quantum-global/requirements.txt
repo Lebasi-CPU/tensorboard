@@ -3,8 +3,24 @@ flask-jwt-extended
 yfinance
 pandas
 numpy
-requests
 pyspark
-# These may require more complex setup in Docker, keeping them as placeholders if used
-# qiskit
-# transformers
+requests>=2.31.0
+pycryptodome>=3.19.0
+pydantic>=2.5.2
+pydantic-settings
+redis>=5.0.1
+psycopg2-binary>=2.9.9
+firebase-admin>=6.2.0
+prometheus-client>=0.19.0
+python-json-logger>=2.0.7
+python-dotenv>=1.0.0
+transformers
+torch
+boto3
+schedule
+great_expectations
+featuretools
+geopy
+geopandas
+matplotlib
+seaborn

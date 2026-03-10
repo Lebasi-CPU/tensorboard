@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Set entrypoint
-CMD ["python", "avatar_quantum_finance.py"]
+CMD ["python", "main.py"]
