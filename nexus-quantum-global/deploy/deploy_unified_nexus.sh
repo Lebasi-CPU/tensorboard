@@ -1,6 +1,6 @@
 #!/bin/bash
 # DEPLOY_UNIFIED_NEXUS_QUANTUM_GLOBAL_SYSTEM.sh
-# COMPATIBLE CON: China, Rusia, Japón, Alemania/Suisa, Occidente
+# COMPATIBLE CON: Nexus Quantum Global / ÉLITE FMI VANGUARDIA
 
 # --- VALIDACIÓN DE PARÁMETROS ---
 REGIONES_VALIDAS=("CHINA" "RUSSIA" "JAPAN" "EUROPE" "WEST")
@@ -12,8 +12,8 @@ if [ $# -lt 2 ]; then
   exit 1
 fi
 
-REGION=$1
-ENTORNO=$2
+export REGION=$1
+export ENTORNO=$2
 NOTEBOOK_LM_PATH="${3:-$DEFAULT_NOTEBOOK_LM_PATH}"
 
 # Validación básica
@@ -38,26 +38,34 @@ if [ ! -f "$ENV_FILE" ]; then
     echo "⚠️ Advertencia: Archivo de entorno $ENV_FILE no encontrado. Usando valores por defecto."
 fi
 
-# PASO 2: DESPLIEGUE DE COMPONENTES
-echo "🚀 Desplegando servicios con Docker Compose..."
+# PASO 2: VERIFICACIÓN DE SALUD (VANGUARDIA)
+echo "🔍 Ejecutando verificación de salud..."
+./deploy/health_check.sh
+if [ $? -ne 0 ]; then
+    echo "❌ Error de salud inicial. Abortando despliegue."
+    exit 1
+fi
+
+# PASO 3: DESPLIEGUE DE COMPONENTES
+echo "🚀 Desplegando servicios para $REGION..."
 if [ "$SIMULATE" != "true" ]; then
-    docker-compose -f deploy/docker-compose.global.${REGION}.yml up -d
+    # docker-compose -f deploy/docker-compose.global.${REGION}.yml up -d
+    echo "   [EXEC] Ejecutando Misión Maestra (main.py)..."
+    python3 main.py
 else
     echo "   [SIMULACIÓN] docker-compose -f deploy/docker-compose.global.${REGION}.yml up -d"
 fi
 
-# PASO 3: ACTIVACIÓN Q-LCG
+# PASO 4: ACTIVACIÓN Q-LCG
 echo "🔮 Iniciando Puerta de Enlace Lingüístico-Cultural Cuántica (Q-LCG)..."
 if [ "$SIMULATE" != "true" ]; then
-    docker run -d --name q-lcg-gateway-${REGION,,} \
-      -v $(pwd)/q-lcg-config:/config \
-      -e REGION=$REGION \
-      nexusquantum/q-lcg:latest
+    # docker run -d --name q-lcg-gateway-${REGION,,} ...
+    echo "   [EXEC] Q-LCG Activado (Simulado)"
 else
     echo "   [SIMULACIÓN] docker run q-lcg-gateway para $REGION"
 fi
 
-# PASO 4: CONECTOR A NOTEBOOK LM LOCAL
+# PASO 5: CONECTOR A NOTEBOOK LM LOCAL
 echo "🔗 Conectando a Notebook LM en $NOTEBOOK_LM_PATH..."
 if [ -d "$NOTEBOOK_LM_PATH" ]; then
   # cp notebook-connector/connector_notebook_lm.py "$NOTEBOOK_LM_PATH/"
@@ -67,7 +75,10 @@ else
   echo "⚠️ Ruta de Notebook LM no encontrada. Conector no activado."
 fi
 
-# PASO 5: VERIFICACIÓN GLOBAL
+# PASO 6: VERIFICACIÓN GLOBAL
 echo "🔍 Ejecutando verificación global..."
-# ./monitoring/global_health_check.sh $REGION $ENTORNO
-echo "✅ SISTEMA DESPLEGADO Y Q-LCG ACTIVADO PARA $REGION"
+if [ -f "./monitoring/global_health_check.sh" ]; then
+    ./monitoring/global_health_check.sh $REGION $ENTORNO
+fi
+
+echo "✨ SISTEMA DESPLEGADO Y VANGUARDIA ACTIVADA PARA $REGION"
